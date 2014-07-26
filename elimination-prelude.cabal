@@ -39,6 +39,7 @@ library
 
     exposed-modules:    Elimination.Data.Maybe
                     ,   Elimination.Data.List
+                    ,   Elimination.Data.Tuple
 
     other-modules:      LocalPrelude
 

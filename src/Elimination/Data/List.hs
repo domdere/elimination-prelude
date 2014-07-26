@@ -16,9 +16,13 @@ module Elimination.Data.List (
     ,   (.:)
     ,   foldr
     ,   nil
+    ,   head
+    ,   tail
     ) where
 
 import LocalPrelude
+import Elimination.Data.Maybe
+import Elimination.Data.Tuple
 
 -- |
 -- The Type
@@ -74,6 +78,25 @@ nil = List (\_ x -> x)
 (++) :: List a -> List a -> List a
 (++) x y = foldr (.:) y x
 
+-- |
+-- Return The head of the list if there is one.
+--
+head :: List a -> Maybe a
+head = foldr (\x _ -> just x) nothing
+
+-- |
+-- Return the tail if there is one
+--
+-- >>> tail (1 .: 2 .: 3 .: nil)
+--
+tail :: List a -> Maybe (List a)
+tail xs = maybe nothing (just . snd) $ foldr accumulateTail nothing xs
+    where
+        accumulateTail :: a -> Maybe (Tuple a (List a)) -> Maybe (Tuple a (List a))
+        accumulateTail x = just . tuple x . maybe nil (uncurry (.:))
+
+-- helpers
+
 joinList :: List (List a) -> List a
 joinList = foldr (++) nil
 
@@ -88,3 +111,4 @@ fmap2 f mx my = bind mx (\x -> bind my (unitList . f x))
 
 toList' :: List a -> List' a
 toList' = foldr (:.) Nil
+
