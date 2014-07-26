@@ -37,7 +37,13 @@ library
 
     hs-source-dirs:     src
 
-    exposed-modules:
+    exposed-modules:    Elimination.Data.Maybe
+                    ,   Elimination.Data.List
+
+    other-modules:      LocalPrelude
+
+    default-extensions: NoImplicitPrelude
+                    ,   RankNTypes
 
 test-suite              doctests
     type:
