@@ -2,6 +2,42 @@
 
 Common Prelude Data types represented as eliminations instead of sum types.
 
+An experiment to try and compare types represented as ADTs to types represented by the proof obligations that values can discharge...
+
+## No ADTs
+
+### Products
+
+Instead of
+
+``` Haskell
+data (,) a b = (,) a b
+```
+
+we have something like:
+
+``` Haskell
+type Product a b = forall c. (a -> b -> c) -> c
+```
+
+As in a value of type `Product a b` can fill the `a` and `b` holes in a `a -> b -> c` function chain.
+
+### Coproducts
+
+Instead of
+
+``` Haskell
+data Either a b = Left a | Right b
+```
+
+We have something like this:
+
+``` Haskell
+type Coproduct a b = forall c. (a -> c) -> (b -> c) -> c
+```
+
+If we have a value of `Coproduct a b` then we have either a value of type `a` or a value of type `b` so given a value of type `a -> c` AND a value of type `b -> c` then we can **definitely** get a vlaue of type `c`
+
 ## Building the project
 
 Install the dependencies first with either:
