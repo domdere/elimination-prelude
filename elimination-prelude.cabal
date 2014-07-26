@@ -37,7 +37,8 @@ library
 
     hs-source-dirs:     src
 
-    exposed-modules:    Elimination.Data.Maybe
+    exposed-modules:    Elimination.Data.Either
+                    ,   Elimination.Data.Maybe
                     ,   Elimination.Data.List
                     ,   Elimination.Data.Tuple
 
