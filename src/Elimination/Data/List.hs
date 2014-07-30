@@ -22,12 +22,12 @@ module Elimination.Data.List (
 
 import LocalPrelude
 import Elimination.Data.Maybe
-import Elimination.Data.Tuple
+import Elimination.Data.Product
 
 -- |
 -- The Type
 --
-data List a = List { _foldr :: forall b. (a -> b -> b) -> b -> b }
+newtype List a = List { _foldr :: forall b. (a -> b -> b) -> b -> b }
 
 data List' a =
         Nil
@@ -92,8 +92,8 @@ head = foldr (\x _ -> just x) nothing
 tail :: List a -> Maybe (List a)
 tail xs = maybe nothing (just . snd) $ foldr accumulateTail nothing xs
     where
-        accumulateTail :: a -> Maybe (Tuple a (List a)) -> Maybe (Tuple a (List a))
-        accumulateTail x = just . tuple x . maybe nil (uncurry (.:))
+        accumulateTail :: a -> Maybe (Product a (List a)) -> Maybe (Product a (List a))
+        accumulateTail x = just . product x . maybe nil (uncurry (.:))
 
 -- helpers
 

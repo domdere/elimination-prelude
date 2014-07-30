@@ -23,7 +23,7 @@ import LocalPrelude
 -- |
 -- The Type
 --
-data Maybe a = Maybe { _maybe :: forall b. b -> (a -> b) -> b }
+newtype Maybe a = Maybe { _maybe :: forall b. b -> (a -> b) -> b }
 
 data Maybe' a = Nothing | Just a deriving (Show, Eq)
 

@@ -28,6 +28,7 @@ library
     build-depends:      base < 5 && >= 4
                     ,   containers
                     ,   array
+                    ,   bifunctors          == 4.1.*
 
     ghc-options:        -Wall
                         -fno-warn-unused-imports
@@ -37,10 +38,10 @@ library
 
     hs-source-dirs:     src
 
-    exposed-modules:    Elimination.Data.Either
+    exposed-modules:    Elimination.Data.Coproduct
                     ,   Elimination.Data.Maybe
                     ,   Elimination.Data.List
-                    ,   Elimination.Data.Tuple
+                    ,   Elimination.Data.Product
 
     other-modules:      LocalPrelude
 
